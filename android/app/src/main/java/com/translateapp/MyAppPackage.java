@@ -23,7 +23,6 @@ public class MyAppPackage implements ReactPackage {
         List<NativeModule> modules = new ArrayList<>();
 
         modules.add(new TranslatorModule(reactContext));
-        modules.add(new TextToSpeechModule(reactContext));
 
         return modules;
     }

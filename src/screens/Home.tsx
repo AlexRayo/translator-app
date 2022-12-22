@@ -28,12 +28,10 @@ import {
 
 
 const App = () => {
-    const { TranslatorModule, TextToSpeechModule: tts } = NativeModules;
-    //const [text, setText] = useState("")
+    const { TranslatorModule} = NativeModules;
     const [textToEnglish, setTextToEnglish] = useState("")
 
     const onChangeText = (text: string) => {
-        //setText(iText);
         TranslatorModule.toEnglish(text)
             .then((res: string) => {
                 setTextToEnglish(res)
@@ -70,7 +68,7 @@ const App = () => {
                         <Button
                             mode="contained"
                             onPress={() => {
-                                tts.speak(textToEnglish, {})
+                                TranslatorModule.tts(textToEnglish)
                             }}
                             style={[Styles.my1]}
                         >

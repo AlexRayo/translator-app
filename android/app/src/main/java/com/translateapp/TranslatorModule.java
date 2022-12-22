@@ -119,7 +119,17 @@ public class TranslatorModule extends ReactContextBaseJavaModule {
                     }
                 });
     }
-
+    @ReactMethod
+    public void tts(String text, Promise promise) {
+        try {
+            promise.resolve(true);
+            ttsInstance.speak(text, TextToSpeech.QUEUE_FLUSH, null, null);
+        }
+        catch (Exception error){
+            promise.reject(error);
+            Log.d("ERROR: ", error.toString());
+        }
+    }
     @ReactMethod
     public void toEnglish(String textToTranslate, Promise promise) {
         translateToEnglish.translate(textToTranslate)
