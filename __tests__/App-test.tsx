@@ -8,7 +8,15 @@ import App from '../App';
 
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';
+import {render} from '@testing-library/react-native'
+jest.useFakeTimers()
 
-it('renders correctly', () => {
-  renderer.create(<App />);
-});
+let mainComponent:any;
+describe('MyComponent', () => {
+    beforeEach(()=>{
+        mainComponent = render(<App/>)
+    })
+    it('renders correctly', () => {
+        expect(mainComponent).toBeDefined();
+    });
+})

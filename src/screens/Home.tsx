@@ -28,7 +28,7 @@ import {
 
 
 const App = () => {
-    const { TranslatorModule} = NativeModules;
+    const { TranslatorModule, TextToSpeechModule: tts } = NativeModules;
     const [textToEnglish, setTextToEnglish] = useState("")
 
     const onChangeText = (text: string) => {

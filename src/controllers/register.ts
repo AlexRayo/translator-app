@@ -1,5 +1,5 @@
 import { ToastAndroid } from 'react-native';
-import EncryptedStorage from 'react-native-encrypted-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { ResRegister, formParams } from '../types/types';
 
@@ -9,7 +9,7 @@ const RegisterData = () => {
         return new Promise<ResRegister>((resolve, reject) => {
             console.log("Loading register...")
             try {
-                EncryptedStorage.getItem('register')
+                AsyncStorage.getItem('register')
                     .then(result => {
                         if (result != null) {
                             const _result: [] = JSON.parse(result);
@@ -72,7 +72,7 @@ const RegisterData = () => {
                     console.log("register length before saving: " + register?.length)
                     newRegData?.push(data);
 
-                    EncryptedStorage.setItem('register', JSON.stringify(newRegData))
+                    AsyncStorage.setItem('register', JSON.stringify(newRegData))
                         .then(() => {
                             ToastAndroid.show(`Nuevo registro agregado!`, ToastAndroid.LONG);
                             console.log("NEW register length: " + newRegData?.length)
