@@ -26,16 +26,31 @@ import {
     TextInput,
 } from 'react-native-paper';
 
+import { save, fetchAll } from "../firebase/api";
+
+const data = {
+    name: 'Juanito Doe',
+    age: 30,
+    city: 'Nueva York'
+  };
 
 const App = () => {
     const { TranslatorModule, TextToSpeechModule: tts } = NativeModules;
     const [textToEnglish, setTextToEnglish] = useState("")
 
     const onChangeText = (text: string) => {
-        TranslatorModule.toEnglish(text)
+        try {
+            TranslatorModule.toEnglish(text)
             .then((res: string) => {
                 setTextToEnglish(res)
             })
+            .catch((err:any) =>{
+                console.log(err);
+            })
+        } catch (error) {
+            console.log(error)
+        }
+        
     }
 
     return (
@@ -44,6 +59,8 @@ const App = () => {
                 mode="outlined"
                 onPress={() => {
                     TranslatorModule.checkDownloadedPackages()
+                    .then((res:boolean) => {console.log("Downloaded packages: " + res)})
+                    .catch((err:any) => {console.log("Error downloading: " + err)})
                 }}
                 style={Styles.my1}
             >
@@ -68,7 +85,8 @@ const App = () => {
                         <Button
                             mode="contained"
                             onPress={() => {
-                                TranslatorModule.tts(textToEnglish)
+                                TranslatorModule.tts(textToEnglish);
+                                //save(data)
                             }}
                             style={[Styles.my1]}
                         >
