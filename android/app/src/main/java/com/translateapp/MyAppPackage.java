@@ -23,6 +23,7 @@ public class MyAppPackage implements ReactPackage {
         List<NativeModule> modules = new ArrayList<>();
 
         modules.add(new TranslatorModule(reactContext));
+        modules.add(new FirebaseModule(reactContext));
 
         return modules;
     }

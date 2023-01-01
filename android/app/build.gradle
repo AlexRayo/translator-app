@@ -1,5 +1,5 @@
 apply plugin: "com.android.application"
-//apply plugin: 'com.google.gms.google-services' // <- For Firebase
+apply plugin: 'com.google.gms.google-services' // <- For Firebase
 
 import com.android.build.OutputFile
 import org.apache.tools.ant.taskdefs.condition.Os
@@ -250,9 +250,12 @@ android {
 }
 
 dependencies {
+    implementation 'com.google.firebase:firebase-firestore:21.4.3'
+
     implementation 'androidx.core:core-ktx:1.3.1'
 
-    implementation 'com.google.mlkit:translate:17.0.1'
+    implementation 'com.google.mlkit:translate:17.0.1'// For translate dictionaries
+
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
     //noinspection GradleDynamicVersion

@@ -27,12 +27,12 @@ public class TranslatorModule extends ReactContextBaseJavaModule {
     TextToSpeech ttsInstance;
     private boolean ttsReady = false;
     private boolean dictionaryReady = false;
-    private boolean dictionaryEsReady = false;
 
 
     TranslatorModule(ReactApplicationContext context) {
 
         super(context);
+
         //Create a Translator object, configuring it with the source and target languages:
         try {
         TranslatorOptions translatorOptionsSpanish =
@@ -71,6 +71,7 @@ public class TranslatorModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void checkDownloadedPackages(Promise promise) {
+
         DownloadConditions downloadConditions = new DownloadConditions.Builder()
                 .requireWifi()
                 .build();

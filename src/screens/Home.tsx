@@ -35,8 +35,10 @@ const data = {
   };
 
 const App = () => {
-    const { TranslatorModule, TextToSpeechModule: tts } = NativeModules;
+    const { TranslatorModule, FirebaseModule, TextToSpeechModule: tts } = NativeModules;
     const [textToEnglish, setTextToEnglish] = useState("")
+
+    //FirebaseModule.save("data ASDFKLFDJLKSJFDHKLJFL")
 
     const onChangeText = (text: string) => {
         try {
@@ -86,7 +88,7 @@ const App = () => {
                             mode="contained"
                             onPress={() => {
                                 TranslatorModule.tts(textToEnglish);
-                                //save(data)
+                                fetchAll()
                             }}
                             style={[Styles.my1]}
                         >
