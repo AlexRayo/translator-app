@@ -2,21 +2,15 @@ package com.translateapp;
 
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 public class FirebaseModule extends ReactContextBaseJavaModule {
@@ -34,9 +28,9 @@ public class FirebaseModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void save(String data, Promise promise) {
-        Log.w("ReactNativeData", data);
+        Log.w("PikachuSaveData", data);
         try {
-            /*
+
             JSONObject json = new JSONObject(data);
             String name = json.getString("name");
             int age = json.getInt("age");
@@ -48,11 +42,8 @@ public class FirebaseModule extends ReactContextBaseJavaModule {
             user.put("age", age);
             user.put("city",city);
 
-            //user.put("name", "WOS");
-            //user.put("age", 23);
-
             // Add the user to the "users" collection
-            /*
+
             firestore.collection("users").add(user)
                     .addOnSuccessListener(documentReference -> {
                         // Document added successfully
@@ -65,7 +56,7 @@ public class FirebaseModule extends ReactContextBaseJavaModule {
                         //Toast.makeText(MainActivity.this, "Error adding user", Toast.LENGTH_SHORT).show();
                     });
 
-             */
+
         }
      catch(Exception e) {
         //

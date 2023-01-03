@@ -32,28 +32,40 @@ const data = {
     name: 'Juanito Doe',
     age: 30,
     city: 'Nueva York'
-  };
+};
 
 const App = () => {
-    const { TranslatorModule, FirebaseModule, TextToSpeechModule: tts } = NativeModules;
+    const { TranslatorModule, FirebaseModule, STTModule, TextToSpeechModule: tts } = NativeModules;
     const [textToEnglish, setTextToEnglish] = useState("")
+    const [textSTT, setTextSTT] = useState("")
 
-    //FirebaseModule.save("data ASDFKLFDJLKSJFDHKLJFL")
+    //FirebaseModule.save(JSON.stringify(data))
 
     const onChangeText = (text: string) => {
         try {
             TranslatorModule.toEnglish(text)
-            .then((res: string) => {
-                setTextToEnglish(res)
-            })
-            .catch((err:any) =>{
-                console.log(err);
-            })
+                .then((res: string) => {
+                    setTextToEnglish(res)
+                })
+                .catch((err: any) => {
+                    console.log(err);
+                })
         } catch (error) {
             console.log(error)
         }
-        
+
     }
+
+    React.useEffect(() => {
+      if (textToEnglish.length === 0) {
+        setTextSTT("");
+      }
+    
+      return () => {
+        
+      }
+    }, [textToEnglish])
+    
 
     return (
         <SafeAreaView style={Styles.container}>
@@ -61,8 +73,8 @@ const App = () => {
                 mode="outlined"
                 onPress={() => {
                     TranslatorModule.checkDownloadedPackages()
-                    .then((res:boolean) => {console.log("Downloaded packages: " + res)})
-                    .catch((err:any) => {console.log("Error downloading: " + err)})
+                        .then((res: boolean) => { console.log("Downloaded packages: " + res) })
+                        .catch((err: any) => { console.log("Error downloading: " + err) })
                 }}
                 style={Styles.my1}
             >
@@ -97,6 +109,38 @@ const App = () => {
                     </View>
                     : null
             }
+            <Button
+                onPress={() => {
+                    STTModule.startVoiceRecognition(textToEnglish)
+                        .then((res: any) => {
+                            console.log(res)
+                            setTextSTT(res)
+                        })
+                        .catch((err: any) => { console.log(err) })
+                }}
+                mode={"contained"}
+                style={Styles.my1}
+            >
+                Test de SPEECH
+            </Button>
+            {
+                textSTT.length > 0 && textToEnglish.length > 0 ?
+                    <View>
+                        <Text
+                            style={[Styles.textCenter, Styles.textMD]}
+                        >
+                            {textSTT.toLowerCase() == textToEnglish.toLowerCase()? "Tu pronunciación es correcta!" : "Pronunciaste mál :("}
+                            
+                        </Text>
+                        <Text
+                            style={[Styles.textCenter, Styles.textBold, Styles.textMD]}
+                        >
+                            {textSTT}
+                        </Text>
+                    </View>
+                    : null
+            }
+
         </SafeAreaView>
     );
 };

@@ -19,6 +19,13 @@ import com.google.mlkit.nl.translate.TranslatorOptions;
 
 import java.util.Locale;
 
+import android.content.Intent;
+import android.speech.RecognizerIntent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
+import java.util.List;
+
 public class TranslatorModule extends ReactContextBaseJavaModule {
     ReactApplicationContext ReactAppContext;
     private Translator translateToSpanish;

@@ -3,7 +3,6 @@ package com.translateapp;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.uimanager.ViewManager;
 
 import java.util.ArrayList;
@@ -24,6 +23,7 @@ public class MyAppPackage implements ReactPackage {
 
         modules.add(new TranslatorModule(reactContext));
         modules.add(new FirebaseModule(reactContext));
+        modules.add(new STTModule(reactContext));
 
         return modules;
     }

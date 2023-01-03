@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TranslateApp</string>
+    <string name="subtitle" />
+    <string name="button_text" />
 </resources>
