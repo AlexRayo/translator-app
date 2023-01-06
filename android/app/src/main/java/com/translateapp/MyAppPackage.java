@@ -24,6 +24,8 @@ public class MyAppPackage implements ReactPackage {
         modules.add(new TranslatorModule(reactContext));
         modules.add(new FirebaseModule(reactContext));
         modules.add(new STTModule(reactContext));
+        modules.add(new LoginModule(reactContext));
+        modules.add(new SignInModule(reactContext));
 
         return modules;
     }

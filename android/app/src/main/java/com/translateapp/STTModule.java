@@ -40,7 +40,7 @@ public class STTModule extends ReactContextBaseJavaModule implements ActivityEve
             // Crea una intención para iniciar el reconocimiento de voz
             Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
 
-            //Establede el modelo de lenguaje en Inglés
+            //Establece el modelo de lenguaje en Inglés
             intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-US");
 
             // Establece el modelo de lenguaje en forma libre

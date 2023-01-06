@@ -26,7 +26,7 @@ import {
     TextInput,
 } from 'react-native-paper';
 
-import { save, fetchAll } from "../firebase/api";
+import { supabase } from "../supabase/supabaseClient";
 
 const data = {
     name: 'Juanito Doe',
@@ -35,11 +35,21 @@ const data = {
 };
 
 const App = () => {
-    const { TranslatorModule, FirebaseModule, STTModule, TextToSpeechModule: tts } = NativeModules;
+    const { TranslatorModule, FirebaseModule, SignInModule, STTModule, TextToSpeechModule: tts } = NativeModules;
     const [textToEnglish, setTextToEnglish] = useState("")
     const [textSTT, setTextSTT] = useState("")
+    const [authUser, setAuthUser] = useState(false);
 
-    //FirebaseModule.save(JSON.stringify(data))
+    const [clients, setClients] = useState<any>([]);
+
+    const fetchClients = async () => {
+        const {data} = await supabase
+        .from('users')
+        .select()
+        setClients(data)
+        console.log(data)
+    }
+
 
     const onChangeText = (text: string) => {
         try {
@@ -100,7 +110,6 @@ const App = () => {
                             mode="contained"
                             onPress={() => {
                                 TranslatorModule.tts(textToEnglish);
-                                fetchAll()
                             }}
                             style={[Styles.my1]}
                         >
@@ -139,6 +148,30 @@ const App = () => {
                         </Text>
                     </View>
                     : null
+            }
+
+            <Button
+                onPress={() => {
+                    fetchClients()
+                }}
+                mode={"contained"}
+                style={Styles.my1}
+            >
+                Fetch users
+            </Button>
+            <Button
+                onPress={() => {
+                    SignInModule.login()
+                }}
+                mode={"contained"}
+                style={Styles.my1}
+            >
+                Login
+            </Button>
+            {
+                (authUser) ?
+                    <Text>{`Name: ${SignInModule.getGivenName()}`}</Text>
+                :null
             }
 
         </SafeAreaView>
