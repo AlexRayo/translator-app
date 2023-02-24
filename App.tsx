@@ -23,6 +23,8 @@ import {
 } from 'react-native-paper';
 
 
+
+
 const App = () => {
     const { TranslatorModule, TextToSpeechModule: tts } = NativeModules;
     const [text, setText] = useState("")
@@ -30,6 +32,8 @@ const App = () => {
     const onChangeText = (iText: string) => {
 
     }
+    
+
 
     return (
         <SafeAreaView>

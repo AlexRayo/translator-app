@@ -43,13 +43,37 @@ const App = () => {
     const [clients, setClients] = useState<any>([]);
 
     const fetchClients = async () => {
-        const {data} = await supabase
-        .from('users')
-        .select()
+        const { data } = await supabase
+            .from('users')
+            .select()
         setClients(data)
         console.log(data)
     }
 
+    const signUp = async () => {
+        const { data, error } = await supabase.auth.signUp({
+            email: 'testemailasdf815@gmail.com',
+            password: '123456789',
+        })
+        console.log(data)
+    }
+
+    const signIn = async () => {
+        signInPromise()
+            .then(user => console.log("SUCCESS SIGNED IN: ",user))
+            .catch(error => console.error("ERROR ON SIGN IN: ",error))
+    }
+
+    const signInPromise = () => {
+        return new Promise((resolve, reject) => {
+            supabase.auth.signInWithPassword({
+                email: 'godyutaru@gmail.com',
+                password: '123456789',
+            })
+                .then(response => resolve(response))
+                .catch(error => reject(error))
+        })
+    }
 
     const onChangeText = (text: string) => {
         try {
@@ -67,15 +91,15 @@ const App = () => {
     }
 
     React.useEffect(() => {
-      if (textToEnglish.length === 0) {
-        setTextSTT("");
-      }
-    
-      return () => {
-        
-      }
+        if (textToEnglish.length === 0) {
+            setTextSTT("");
+        }
+
+        return () => {
+
+        }
     }, [textToEnglish])
-    
+
 
     return (
         <SafeAreaView style={Styles.container}>
@@ -138,8 +162,8 @@ const App = () => {
                         <Text
                             style={[Styles.textCenter, Styles.textMD]}
                         >
-                            {textSTT.toLowerCase() == textToEnglish.toLowerCase()? "Tu pronunciación es correcta!" : "Pronunciaste mál :("}
-                            
+                            {textSTT.toLowerCase() == textToEnglish.toLowerCase() ? "Tu pronunciación es correcta!" : "Pronunciaste mál :("}
+
                         </Text>
                         <Text
                             style={[Styles.textCenter, Styles.textBold, Styles.textMD]}
@@ -160,18 +184,23 @@ const App = () => {
                 Fetch users
             </Button>
             <Button
-                onPress={() => {
-                    SignInModule.login()
-                }}
+                onPress={signIn}
                 mode={"contained"}
                 style={Styles.my1}
             >
                 Login
             </Button>
+            <Button
+                onPress={signUp}
+                mode={"contained"}
+                style={Styles.my1}
+            >
+                SignUp
+            </Button>
             {
                 (authUser) ?
                     <Text>{`Name: ${SignInModule.getGivenName()}`}</Text>
-                :null
+                    : null
             }
 
         </SafeAreaView>

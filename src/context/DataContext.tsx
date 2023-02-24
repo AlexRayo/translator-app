@@ -2,7 +2,7 @@ import React, { createContext, useState } from 'react';
 
 import {ResRegister, formParams} from '../types/types';
 
-import registerData from '../controllers/register'
+import registerData from '../controllers/register';
 
 export interface RegisterProviderProps {
     register : ResRegister,
